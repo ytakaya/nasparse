@@ -35,6 +35,8 @@ func (l *Lexer) NextToken() token.Token {
 			tok.Type = token.TextToken
 			tok.Literal = l.readText()
 		}
+	case 0:
+		tok.Type = token.ErrorToken
 	default:
 		tok.Type = token.TextToken
 		tok.Literal = l.readText()
