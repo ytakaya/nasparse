@@ -20,9 +20,7 @@ func TestNextToken(t *testing.T) {
 	}{
 		{token.StartTagToken, "<html>"},
 		{token.StartTagToken, "<body>"},
-		{token.TextToken, `
-		(#%Message|sample#)
-	`},
+		{token.TextToken, `(#%Message|sample#)`},
 		{token.EndTagToken, "</body>"},
 		{token.EndTagToken, "</html>"},
 	}
