@@ -18,6 +18,8 @@ const (
 	CommentToken
 	// A DoctypeToken looks like <!DOCTYPE x>
 	DoctypeToken
+	// A NaspToken looks like (#%Message|sample#)
+	NaspToken
 )
 
 type Token struct {

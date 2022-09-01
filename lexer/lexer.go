@@ -25,6 +25,14 @@ func (l *Lexer) NextToken() token.Token {
 		tokenType, ident := l.readTag()
 		tok.Type = tokenType
 		tok.Literal = ident
+	case '(':
+		if l.peekChar() == '#' {
+			tok.Type = token.NaspToken
+			tok.Literal = l.readNasp()
+		} else {
+			tok.Type = token.TextToken
+			tok.Literal = l.readText()
+		}
 	default:
 		tok.Type = token.TextToken
 		tok.Literal = l.readText()
@@ -85,6 +93,15 @@ func (l *Lexer) readText() string {
 	for !isWhiteSpace(l.ch) {
 		l.readChar()
 	}
+	return l.input[position:l.position]
+}
+
+func (l *Lexer) readNasp() string {
+	position := l.position
+	for l.ch != ')' {
+		l.readChar()
+	}
+	l.readChar()
 	return l.input[position:l.position]
 }
 
