@@ -6,6 +6,7 @@ type Lexer struct {
 	input        string
 	position     int
 	readPosition int
+	linePosition int
 	ch           byte
 }
 
@@ -20,6 +21,7 @@ func (l *Lexer) NextToken() token.Token {
 
 	l.skipWhitespace()
 
+	tok.LinePosition = l.linePosition
 	switch l.ch {
 	case '<':
 		tokenType, ident := l.readTag()
@@ -55,6 +57,11 @@ func (l *Lexer) readChar() {
 	}
 	l.position = l.readPosition
 	l.readPosition += 1
+	if l.linePosition == 0 {
+		l.linePosition = 1
+	} else if l.ch == '\n' {
+		l.linePosition += 1
+	}
 }
 
 func (l *Lexer) peekChar() byte {

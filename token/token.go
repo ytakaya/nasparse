@@ -23,6 +23,7 @@ const (
 )
 
 type Token struct {
-	Type    TokenType
-	Literal string
+	Type         TokenType
+	Literal      string
+	LinePosition int
 }
